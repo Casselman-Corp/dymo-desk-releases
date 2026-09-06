@@ -95,7 +95,9 @@
 
   .split {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-    gap: 1rem; margin: 1.25rem 0 0; align-items: start;
+    gap: 1rem; margin: 1.25rem 0 0;
+    /* Paired platform cards match height so neither reads as the lesser one. */
+    align-items: stretch;
   }
   .plat {
     background: var(--surface); border: 1px solid var(--border);
