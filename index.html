@@ -4,24 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Download DYMO Print Desk</title>
-<meta name="description" content="Download DYMO Print Desk for Windows or Mac.">
+<meta name="description" content="Download DYMO Print Desk for Windows or Mac. Latest stable release.">
 <meta name="color-scheme" content="light">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-  /* Single light appearance, committed deliberately: this page is read on
+  /* Single light appearance, committed deliberately: this page is opened on
      unfamiliar machines and must never invert into something unexpected. */
   :root {
     --page:    #F4F6F8;
     --surface: #FFFFFF;
     --text:    #101720;
     --muted:   #5A6675;
+    --faint:   #7C8794;
     --border:  #DCE2E9;
-    --border-strong: #C3CCD6;
     --accent:  #1A56A0;
     --accent-hover: #164A8B;
     --accent-wash: #EDF3FA;
+    --accent-line:  #CFE0F2;
+    --ok:      #1E6B43;
+    --ok-wash: #E9F4EE;
+    --ok-line: #BFDCCB;
     --radius: 6px;
   }
 
@@ -37,168 +41,150 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  .wrap { max-width: 56rem; margin: 0 auto; padding: 0 1.5rem; }
+  .wrap { max-width: 58rem; margin: 0 auto; padding: 0 1.5rem; }
 
   /* ---- Top bar ---- */
-  .topbar {
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-  }
+  .topbar { border-bottom: 1px solid var(--border); background: var(--surface); }
   .topbar .wrap {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; height: 56px;
   }
-  .wordmark {
-    font-weight: 700;
-    font-size: .9rem;
-    letter-spacing: .02em;
-  }
+  .wordmark { font-weight: 700; font-size: .9rem; }
+  .navlinks { display: flex; gap: 1.25rem; }
   .topbar a {
-    color: var(--accent);
-    text-decoration: none;
-    font-size: .9rem;
-    font-weight: 500;
+    color: var(--accent); text-decoration: none;
+    font-size: .9rem; font-weight: 500;
   }
   .topbar a:hover { text-decoration: underline; }
 
   /* ---- Masthead ---- */
-  header.masthead { padding: 3.25rem 0 0; }
+  header.masthead { padding: 3rem 0 0; }
   h1 {
-    font-size: clamp(2rem, 4.5vw, 2.6rem);
-    font-weight: 700;
-    letter-spacing: -.02em;
-    line-height: 1.12;
-    margin: 0;
-    text-wrap: balance;
+    font-size: clamp(2rem, 4.5vw, 2.55rem);
+    font-weight: 700; letter-spacing: -.02em; line-height: 1.12;
+    margin: 0; text-wrap: balance;
   }
   .lede {
-    font-size: 1.1rem;
-    color: var(--muted);
-    max-width: 46ch;
-    margin: .75rem 0 0;
+    font-size: 1.08rem; color: var(--muted);
+    max-width: 48ch; margin: .7rem 0 0;
   }
-  .spec {
+
+  /* ---- Release bar: channel, version, date, notes ---- */
+  .release-bar {
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: .6rem 1rem;
+    margin: 1.75rem 0 0; padding: .8rem 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .channel {
+    font-size: .68rem; font-weight: 700; letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--ok); background: var(--ok-wash);
+    border: 1px solid var(--ok-line);
+    padding: .2rem .5rem; border-radius: 3px;
+  }
+  .release-meta {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: .78rem;
-    color: var(--muted);
-    margin: 1.1rem 0 0;
-    letter-spacing: .01em;
+    font-size: .8rem; color: var(--muted);
   }
+  .release-bar .notes { margin-left: auto; font-size: .875rem; font-weight: 500; }
+  .release-bar a { color: var(--accent); }
 
   /* ---- Two platforms, equal weight ---- */
   .platforms {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
-    gap: 1.25rem;
-    margin: 2.5rem 0 0;
-    align-items: stretch;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+    gap: 1.25rem; margin: 1.25rem 0 0; align-items: stretch;
   }
   .platform {
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 1.5rem;
   }
   .platform-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
     gap: .75rem;
-    margin-bottom: .2rem;
   }
   .platform h2 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: -.01em;
-    margin: 0;
+    font-size: 1.15rem; font-weight: 700; letter-spacing: -.01em; margin: 0;
   }
   .detected {
-    font-size: .68rem;
-    font-weight: 600;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: var(--accent-wash);
-    border: 1px solid #CFE0F2;
-    border-radius: 3px;
-    padding: .15rem .45rem;
-    white-space: nowrap;
+    font-size: .68rem; font-weight: 700; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--accent);
+    background: var(--accent-wash); border: 1px solid var(--accent-line);
+    border-radius: 3px; padding: .15rem .45rem; white-space: nowrap;
   }
-  .requires {
-    font-size: .9rem;
-    color: var(--muted);
-    margin: 0 0 1.15rem;
-  }
+  .requires { font-size: .9rem; color: var(--muted); margin: .15rem 0 1.15rem; }
 
   .btn {
-    display: block;
-    text-align: center;
-    font: inherit;
-    font-weight: 600;
-    text-decoration: none;
-    padding: .7rem 1.1rem;
-    border-radius: 4px;
-    background: var(--accent);
-    color: #fff;
-    border: 1px solid var(--accent);
+    display: block; text-align: center; font: inherit; font-weight: 600;
+    text-decoration: none; padding: .7rem 1.1rem; border-radius: 4px;
+    background: var(--accent); color: #fff; border: 1px solid var(--accent);
   }
   .btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 
   .filemeta {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: .74rem;
-    color: var(--muted);
-    margin: .6rem 0 0;
-    text-align: center;
+    font-size: .74rem; color: var(--faint);
+    margin: .6rem 0 0; text-align: center;
   }
-
-  /* Pushed to the bottom so both cards' primary buttons line up. */
   .secondary {
-    margin-top: auto;
-    padding-top: 1.1rem;
-    font-size: .875rem;
-    color: var(--muted);
+    margin-top: auto; padding-top: 1.1rem;
+    font-size: .875rem; color: var(--muted);
   }
   .secondary a { color: var(--accent); font-weight: 500; }
-  .platform + .platform .secondary { border-top: none; }
 
-  /* ---- Guide callout ---- */
+  /* ---- Notices ---- */
   .callout {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    margin: 1.75rem 0 0;
-    padding: 1.15rem 1.35rem;
+    margin: 1.25rem 0 0; padding: 1.1rem 1.3rem;
     background: var(--accent-wash);
-    border: 1px solid #CFE0F2;
+    border: 1px solid var(--accent-line);
     border-radius: var(--radius);
   }
-  .callout-body { margin: 0; }
-  .callout-body strong { font-weight: 600; }
+  .callout strong { font-weight: 600; }
   .callout p { margin: .35rem 0 0; color: var(--muted); font-size: .95rem; }
   .callout a { color: var(--accent); font-weight: 600; }
 
-  footer {
-    margin: 3rem 0 0;
-    border-top: 1px solid var(--border);
-    padding: 1.1rem 0 3.5rem;
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-    font-size: .82rem;
-    color: var(--muted);
+  /* ---- Checksums ---- */
+  details.verify {
+    margin: 1.25rem 0 0; background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--radius);
   }
-  footer a { color: var(--muted); }
+  details.verify summary {
+    cursor: pointer; padding: .85rem 1.2rem;
+    font-size: .9rem; font-weight: 600;
+  }
+  details.verify summary::marker { color: var(--faint); }
+  .verify-body { padding: 0 1.2rem 1.1rem; }
+  .verify-body p { margin: 0 0 .8rem; font-size: .875rem; color: var(--muted); }
+  .sumtable { width: 100%; border-collapse: collapse; font-size: .78rem; }
+  .sumtable th {
+    text-align: left; font-weight: 600; color: var(--muted);
+    padding: .4rem .6rem .4rem 0; border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .sumtable td {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    padding: .45rem .6rem .45rem 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .sumtable td.hash { word-break: break-all; color: var(--muted); }
+  .scroller { overflow-x: auto; }
 
-  a:focus-visible, .btn:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+  footer {
+    margin: 2.5rem 0 0; border-top: 1px solid var(--border);
+    padding: 1.1rem 0 3.5rem;
+    display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    font-size: .82rem; color: var(--muted);
+  }
+  footer a { color: var(--accent); }
+
+  a:focus-visible, .btn:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px;
   }
 </style>
 </head>
@@ -207,16 +193,26 @@
 <div class="topbar">
   <div class="wrap">
     <span class="wordmark">Casselman Corp</span>
-    <a href="setup.html">Setup guide</a>
+    <nav class="navlinks">
+      <a href="setup.html">Setup guide</a>
+      <a href="https://github.com/Casselman-Corp/dymo-desk-releases/releases">All versions</a>
+    </nav>
   </div>
 </div>
 
 <div class="wrap">
   <header class="masthead">
     <h1>DYMO Print Desk</h1>
-    <p class="lede">Print Square inventory barcodes to a DYMO LabelWriter. Pick your product, set a quantity, print.</p>
-    <p class="spec">28 × 89 mm label stock &nbsp;·&nbsp; Code 128 &nbsp;·&nbsp; Windows and macOS</p>
+    <p class="lede">Print Square inventory barcodes to a DYMO LabelWriter. Pick a product, set a quantity, print.</p>
   </header>
+
+  <div class="release-bar">
+    <span class="channel">Latest stable</span>
+    <span class="release-meta" id="release-meta">Loading release information&hellip;</span>
+    <span class="notes">
+      <a id="notes-link" href="https://github.com/Casselman-Corp/dymo-desk-releases/releases/latest">What&rsquo;s new</a>
+    </span>
+  </div>
 
   <div class="platforms">
     <section class="platform">
@@ -224,10 +220,10 @@
         <h2>Windows</h2>
         <span class="detected" id="badge-win" hidden>Your computer</span>
       </div>
-      <p class="requires">Windows 10 or later, 64-bit</p>
-      <a class="btn" id="dl-win"
+      <p class="requires">Windows 10 or later &middot; 64-bit</p>
+      <a class="btn"
          href="https://github.com/Casselman-Corp/dymo-desk-releases/releases/latest/download/DYMO-Print-Desk-Setup.exe">Download for Windows</a>
-      <p class="filemeta" id="meta-win">.exe installer</p>
+      <p class="filemeta" id="meta-win">DYMO-Print-Desk-Setup.exe</p>
       <p class="secondary">Installs itself and adds a desktop shortcut. Nothing else to set up.</p>
     </section>
 
@@ -236,26 +232,42 @@
         <h2>macOS</h2>
         <span class="detected" id="badge-mac" hidden>Your computer</span>
       </div>
-      <p class="requires">macOS 11 or later</p>
-      <a class="btn" id="dl-mac"
+      <p class="requires">macOS 11 or later &middot; Apple silicon or Intel</p>
+      <a class="btn"
          href="https://github.com/Casselman-Corp/dymo-desk-releases/releases/latest/download/DYMO-Print-Desk-arm64.dmg">Download for Mac</a>
-      <p class="filemeta" id="meta-mac">.dmg &middot; Apple silicon</p>
+      <p class="filemeta" id="meta-mac">DYMO-Print-Desk-arm64.dmg &middot; Apple silicon</p>
       <p class="secondary">Using an Intel Mac from before 2020?
-        <a id="dl-mac-intel" href="https://github.com/Casselman-Corp/dymo-desk-releases/releases/latest/download/DYMO-Print-Desk-x64.dmg">Download the Intel build</a>.
+        <a href="https://github.com/Casselman-Corp/dymo-desk-releases/releases/latest/download/DYMO-Print-Desk-x64.dmg">Download the Intel build</a>.
       </p>
     </section>
   </div>
 
   <div class="callout">
-    <div class="callout-body">
-      <strong>Installing for the first time?</strong>
-      <p>Your computer shows a security warning on first launch because the app isn't certificate-signed yet. The <a href="setup.html">setup guide</a> shows exactly which button to click, on either system.</p>
-    </div>
+    <strong>Installing for the first time?</strong>
+    <p>Both systems show a security warning on first launch, because the app isn&rsquo;t certificate-signed yet. The <a href="setup.html">setup guide</a> shows exactly which button to click on each one.</p>
   </div>
 
+  <details class="verify">
+    <summary>Verify your download (SHA-256)</summary>
+    <div class="verify-body">
+      <p>Optional. Compare these against your downloaded file to confirm it arrived intact.
+        On Windows run <code>certutil -hashfile &lt;file&gt; SHA256</code>; on Mac run <code>shasum -a 256 &lt;file&gt;</code>.</p>
+      <div class="scroller">
+        <table class="sumtable">
+          <thead>
+            <tr><th>File</th><th>Size</th><th>SHA-256</th></tr>
+          </thead>
+          <tbody id="sums">
+            <tr><td colspan="3" style="color:var(--faint)">Loading checksums&hellip;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
   <footer>
-    <span id="version">DYMO Print Desk</span>
-    <span><a href="https://github.com/Casselman-Corp/dymo-desk-releases/releases">All versions</a></span>
+    <span>DYMO Print Desk &middot; Casselman Corp</span>
+    <span><a href="https://github.com/Casselman-Corp/dymo-desk-releases/releases">Release history</a></span>
   </footer>
 </div>
 
@@ -268,27 +280,73 @@
     document.getElementById('badge-mac').hidden = false;
   }
 
-  const mb = (bytes) => Math.round(bytes / 1048576) + ' MB';
+  const LABELS = {
+    'DYMO-Print-Desk-Setup.exe': 'Windows installer',
+    'DYMO-Print-Desk-arm64.dmg': 'Mac · Apple silicon',
+    'DYMO-Print-Desk-x64.dmg':   'Mac · Intel',
+  };
+
+  const mb = (bytes) => (bytes / 1048576).toFixed(1) + ' MB';
 
   fetch('https://api.github.com/repos/Casselman-Corp/dymo-desk-releases/releases/latest')
     .then((response) => (response.ok ? response.json() : null))
     .then((release) => {
-      if (!release || !release.tag_name) return;
+      if (!release || !release.tag_name) throw new Error('no release data');
 
-      const size = (name) => release.assets.find((a) => a.name === name)?.size;
-      const win = size('DYMO-Print-Desk-Setup.exe');
-      const mac = size('DYMO-Print-Desk-arm64.dmg');
-
-      if (win) document.getElementById('meta-win').textContent = '.exe installer · ' + mb(win);
-      if (mac) document.getElementById('meta-mac').textContent = '.dmg · Apple silicon · ' + mb(mac);
-
+      const version = release.tag_name.replace(/^v/, '');
       const date = new Date(release.published_at).toLocaleDateString(undefined, {
         year: 'numeric', month: 'long', day: 'numeric',
       });
-      document.getElementById('version').textContent =
-        'Version ' + release.tag_name.replace(/^v/, '') + ' · released ' + date;
+      document.getElementById('release-meta').textContent =
+        'Version ' + version + '  ·  Released ' + date;
+      document.getElementById('notes-link').href = release.html_url;
+
+      const find = (name) => release.assets.find((a) => a.name === name);
+
+      const win = find('DYMO-Print-Desk-Setup.exe');
+      if (win) {
+        document.getElementById('meta-win').textContent = win.name + ' · ' + mb(win.size);
+      }
+      const mac = find('DYMO-Print-Desk-arm64.dmg');
+      if (mac) {
+        document.getElementById('meta-mac').textContent =
+          mac.name + ' · Apple silicon · ' + mb(mac.size);
+      }
+
+      const rows = Object.keys(LABELS)
+        .map(find)
+        .filter(Boolean)
+        .map((asset) => {
+          const tr = document.createElement('tr');
+
+          const file = document.createElement('td');
+          file.textContent = asset.name;
+
+          const size = document.createElement('td');
+          size.textContent = mb(asset.size);
+
+          const hash = document.createElement('td');
+          hash.className = 'hash';
+          hash.textContent = (asset.digest || '').replace(/^sha256:/, '') || 'unavailable';
+
+          tr.append(file, size, hash);
+          return tr;
+        });
+
+      const body = document.getElementById('sums');
+      body.textContent = '';
+      if (rows.length) {
+        rows.forEach((row) => body.appendChild(row));
+      } else {
+        body.innerHTML = '<tr><td colspan="3">No files listed for this release.</td></tr>';
+      }
     })
-    .catch(() => {});
+    .catch(() => {
+      document.getElementById('release-meta').textContent =
+        'Release information unavailable — the download buttons still work.';
+      document.getElementById('sums').innerHTML =
+        '<tr><td colspan="3">Checksums unavailable right now.</td></tr>';
+    });
 </script>
 </body>
 </html>
