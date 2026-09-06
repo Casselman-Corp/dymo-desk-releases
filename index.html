@@ -4,197 +4,289 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Download DYMO Print Desk</title>
-<meta name="description" content="Download DYMO Print Desk for Mac or Windows.">
+<meta name="description" content="Download DYMO Print Desk for Windows or Mac.">
+<meta name="color-scheme" content="light">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Literata:opsz,wght@7..72,400;7..72,600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
+  /* Single light appearance, committed deliberately: this page is read on
+     unfamiliar machines and must never invert into something unexpected. */
   :root {
-    --liner:#EDE8DD; --paper:#FBFAF7; --ink:#15171C; --ink-soft:#4C5058;
-    --rule:#D8D1C2; --accent:#1F4E5F; --accent-ink:#FBFAF7;
-    --shadow: 0 1px 0 rgba(21,23,28,.06), 0 12px 30px -20px rgba(21,23,28,.5);
+    --page:    #F4F6F8;
+    --surface: #FFFFFF;
+    --text:    #101720;
+    --muted:   #5A6675;
+    --border:  #DCE2E9;
+    --border-strong: #C3CCD6;
+    --accent:  #1A56A0;
+    --accent-hover: #164A8B;
+    --accent-wash: #EDF3FA;
+    --radius: 6px;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --liner:#101216; --paper:#191C22; --ink:#ECEAE4; --ink-soft:#A3A8B2;
-      --rule:#2F343D; --accent:#79B2C4; --accent-ink:#101216;
-      --shadow: 0 1px 0 rgba(0,0,0,.4), 0 16px 34px -22px rgba(0,0,0,.9);
-    }
-  }
-  :root[data-theme="dark"] {
-    --liner:#101216; --paper:#191C22; --ink:#ECEAE4; --ink-soft:#A3A8B2;
-    --rule:#2F343D; --accent:#79B2C4; --accent-ink:#101216;
-    --shadow: 0 1px 0 rgba(0,0,0,.4), 0 16px 34px -22px rgba(0,0,0,.9);
-  }
+
   * { box-sizing: border-box; }
+
   body {
-    margin:0; background:var(--liner); color:var(--ink);
-    font-family:"Literata", Georgia, serif; font-size:19px; line-height:1.6;
-    -webkit-font-smoothing:antialiased;
+    margin: 0;
+    background: var(--page);
+    color: var(--text);
+    font-family: "Public Sans", system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
-  .bars {
-    height:30px;
-    background-image:
-      repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 7px),
-      repeating-linear-gradient(90deg, var(--ink) 0 3px, transparent 3px 11px),
-      repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 5px);
-    opacity:.9;
+
+  .wrap { max-width: 56rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---- Top bar ---- */
+  .topbar {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
   }
-  .sheet { max-width:42rem; margin:0 auto; padding:0 1.25rem 4.5rem; }
-  header { padding:3rem 0 0; }
-  .eyebrow {
-    font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.72rem;
-    font-weight:600; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--ink-soft); margin:0;
+  .topbar .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 56px;
   }
+  .wordmark {
+    font-weight: 700;
+    font-size: .9rem;
+    letter-spacing: .02em;
+  }
+  .topbar a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: .9rem;
+    font-weight: 500;
+  }
+  .topbar a:hover { text-decoration: underline; }
+
+  /* ---- Masthead ---- */
+  header.masthead { padding: 3.25rem 0 0; }
   h1 {
-    font-family:"Archivo", system-ui, sans-serif; font-weight:800;
-    font-size:clamp(2.3rem,6vw,3.3rem); line-height:1.03; letter-spacing:-.025em;
-    text-wrap:balance; margin:.7rem 0 0;
+    font-size: clamp(2rem, 4.5vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.12;
+    margin: 0;
+    text-wrap: balance;
   }
-  .standfirst { font-size:1.15rem; color:var(--ink-soft); max-width:36ch; margin:.9rem 0 0; }
+  .lede {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 46ch;
+    margin: .75rem 0 0;
+  }
+  .spec {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .78rem;
+    color: var(--muted);
+    margin: 1.1rem 0 0;
+    letter-spacing: .01em;
+  }
 
-  .primary-card {
-    margin:2.5rem 0 0; padding:1.75rem; background:var(--paper);
-    border:1px solid var(--rule); border-radius:4px; box-shadow:var(--shadow);
+  /* ---- Two platforms, equal weight ---- */
+  .platforms {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+    gap: 1.25rem;
+    margin: 2.5rem 0 0;
+    align-items: stretch;
   }
-  .for-os {
-    font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.72rem;
-    font-weight:600; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--ink-soft); margin:0 0 .9rem;
+  .platform {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
   }
+  .platform-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    margin-bottom: .2rem;
+  }
+  .platform h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    margin: 0;
+  }
+  .detected {
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-wash);
+    border: 1px solid #CFE0F2;
+    border-radius: 3px;
+    padding: .15rem .45rem;
+    white-space: nowrap;
+  }
+  .requires {
+    font-size: .9rem;
+    color: var(--muted);
+    margin: 0 0 1.15rem;
+  }
+
   .btn {
-    display:inline-block; font-family:"Archivo", system-ui, sans-serif;
-    font-weight:700; font-size:1.1rem; text-decoration:none;
-    padding:.85rem 1.6rem; border-radius:3px;
-    background:var(--accent); color:var(--accent-ink); border:1px solid var(--accent);
+    display: block;
+    text-align: center;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    padding: .7rem 1.1rem;
+    border-radius: 4px;
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
   }
-  .btn:hover { filter:brightness(1.12); }
-  .btn-note { margin:.85rem 0 0; font-size:.95rem; color:var(--ink-soft); }
-  .alt { margin:1.1rem 0 0; font-size:.95rem; }
-  .alt a { color:var(--accent); }
+  .btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 
-  .all { margin:2.5rem 0 0; }
-  h2 {
-    font-family:"Archivo", system-ui, sans-serif; font-weight:700;
-    font-size:1.25rem; margin:0 0 .3rem; letter-spacing:-.01em;
-  }
-  ul.files { list-style:none; margin:1rem 0 0; padding:0; display:grid; gap:.5rem; }
-  ul.files li {
-    display:flex; justify-content:space-between; align-items:baseline; gap:1rem;
-    padding:.75rem 1rem; background:var(--paper);
-    border:1px solid var(--rule); border-radius:3px;
-  }
-  ul.files a { color:var(--accent); font-weight:600; text-decoration:none; }
-  ul.files a:hover { text-decoration:underline; }
-  ul.files span {
-    font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.75rem;
-    color:var(--ink-soft); letter-spacing:.06em; text-transform:uppercase;
+  .filemeta {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .74rem;
+    color: var(--muted);
+    margin: .6rem 0 0;
+    text-align: center;
   }
 
+  /* Pushed to the bottom so both cards' primary buttons line up. */
+  .secondary {
+    margin-top: auto;
+    padding-top: 1.1rem;
+    font-size: .875rem;
+    color: var(--muted);
+  }
+  .secondary a { color: var(--accent); font-weight: 500; }
+  .platform + .platform .secondary { border-top: none; }
+
+  /* ---- Guide callout ---- */
   .callout {
-    margin:2.5rem 0 0; padding:1.15rem 1.35rem; background:var(--paper);
-    border:1px solid var(--rule); border-left:3px solid var(--accent); border-radius:3px;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin: 1.75rem 0 0;
+    padding: 1.15rem 1.35rem;
+    background: var(--accent-wash);
+    border: 1px solid #CFE0F2;
+    border-radius: var(--radius);
   }
-  .callout p { margin:.5rem 0 0; }
-  .callout p:first-of-type { margin:0; }
-  .callout a { color:var(--accent); }
+  .callout-body { margin: 0; }
+  .callout-body strong { font-weight: 600; }
+  .callout p { margin: .35rem 0 0; color: var(--muted); font-size: .95rem; }
+  .callout a { color: var(--accent); font-weight: 600; }
 
   footer {
-    margin:3.5rem 0 0; padding-top:1.3rem; border-top:1px solid var(--rule);
-    font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.73rem;
-    letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft);
-    display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+    margin: 3rem 0 0;
+    border-top: 1px solid var(--border);
+    padding: 1.1rem 0 3.5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: .82rem;
+    color: var(--muted);
   }
-  a:focus-visible, .btn:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+  footer a { color: var(--muted); }
+
+  a:focus-visible, .btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 </style>
 </head>
 <body>
 
-<div class="bars" role="presentation"></div>
+<div class="topbar">
+  <div class="wrap">
+    <span class="wordmark">Casselman Corp</span>
+    <a href="setup.html">Setup guide</a>
+  </div>
+</div>
 
-<div class="sheet">
-  <header>
-    <p class="eyebrow">Casselman Corp</p>
+<div class="wrap">
+  <header class="masthead">
     <h1>DYMO Print Desk</h1>
-    <p class="standfirst">Print Square inventory barcodes to a DYMO LabelWriter.</p>
+    <p class="lede">Print Square inventory barcodes to a DYMO LabelWriter. Pick your product, set a quantity, print.</p>
+    <p class="spec">28 × 89 mm label stock &nbsp;·&nbsp; Code 128 &nbsp;·&nbsp; Windows and macOS</p>
   </header>
 
-  <div class="primary-card">
-    <p class="for-os" id="os-label">Choose your computer</p>
-    <a class="btn" id="primary-btn"
-       href="https://github.com/Casselman-Corp/dymo-desk-releases/releases/latest">Download</a>
-    <p class="btn-note" id="primary-note">Pick the version that matches your computer below.</p>
-    <p class="alt" id="alt-line" hidden></p>
+  <div class="platforms">
+    <section class="platform">
+      <div class="platform-head">
+        <h2>Windows</h2>
+        <span class="detected" id="badge-win" hidden>Your computer</span>
+      </div>
+      <p class="requires">Windows 10 or later, 64-bit</p>
+      <a class="btn" id="dl-win"
+         href="https://github.com/Casselman-Corp/dymo-desk-releases/releases/latest/download/DYMO-Print-Desk-Setup.exe">Download for Windows</a>
+      <p class="filemeta" id="meta-win">.exe installer</p>
+      <p class="secondary">Installs itself and adds a desktop shortcut. Nothing else to set up.</p>
+    </section>
+
+    <section class="platform">
+      <div class="platform-head">
+        <h2>macOS</h2>
+        <span class="detected" id="badge-mac" hidden>Your computer</span>
+      </div>
+      <p class="requires">macOS 11 or later</p>
+      <a class="btn" id="dl-mac"
+         href="https://github.com/Casselman-Corp/dymo-desk-releases/releases/latest/download/DYMO-Print-Desk-arm64.dmg">Download for Mac</a>
+      <p class="filemeta" id="meta-mac">.dmg &middot; Apple silicon</p>
+      <p class="secondary">Using an Intel Mac from before 2020?
+        <a id="dl-mac-intel" href="https://github.com/Casselman-Corp/dymo-desk-releases/releases/latest/download/DYMO-Print-Desk-x64.dmg">Download the Intel build</a>.
+      </p>
+    </section>
   </div>
 
-  <section class="all">
-    <h2>All downloads</h2>
-    <ul class="files">
-      <li>
-        <a href="https://github.com/Casselman-Corp/dymo-desk-releases/releases/latest/download/DYMO-Print-Desk-Setup.exe">DYMO Print Desk for Windows</a>
-        <span>.exe</span>
-      </li>
-      <li>
-        <a href="https://github.com/Casselman-Corp/dymo-desk-releases/releases/latest/download/DYMO-Print-Desk-arm64.dmg">Mac — Apple silicon (M1 and newer)</a>
-        <span>.dmg</span>
-      </li>
-      <li>
-        <a href="https://github.com/Casselman-Corp/dymo-desk-releases/releases/latest/download/DYMO-Print-Desk-x64.dmg">Mac — Intel (before 2020)</a>
-        <span>.dmg</span>
-      </li>
-    </ul>
-  </section>
-
   <div class="callout">
-    <p><strong>First time installing?</strong> Read the <a href="setup.html">setup guide</a> first.</p>
-    <p>Your computer will show a security warning the first time you open it. That is expected — the guide shows exactly which button to click.</p>
+    <div class="callout-body">
+      <strong>Installing for the first time?</strong>
+      <p>Your computer shows a security warning on first launch because the app isn't certificate-signed yet. The <a href="setup.html">setup guide</a> shows exactly which button to click, on either system.</p>
+    </div>
   </div>
 
   <footer>
     <span id="version">DYMO Print Desk</span>
-    <span><a href="setup.html" style="color:inherit">Setup guide</a></span>
+    <span><a href="https://github.com/Casselman-Corp/dymo-desk-releases/releases">All versions</a></span>
   </footer>
 </div>
 
 <script>
-  const BASE = 'https://github.com/Casselman-Corp/dymo-desk-releases/releases/latest/download/';
-
+  // Highlight the visitor's platform without demoting the other one.
   const ua = navigator.userAgent;
-  const isWindows = /Windows/i.test(ua);
-  const isMac = /Mac OS X|Macintosh/i.test(ua) && !/iPhone|iPad/i.test(ua);
-
-  const label = document.getElementById('os-label');
-  const btn = document.getElementById('primary-btn');
-  const note = document.getElementById('primary-note');
-  const alt = document.getElementById('alt-line');
-
-  if (isWindows) {
-    label.textContent = 'For your Windows PC';
-    btn.textContent = 'Download for Windows';
-    btn.href = BASE + 'DYMO-Print-Desk-Setup.exe';
-    note.textContent = 'Double-click the file once it downloads. It installs itself.';
-  } else if (isMac) {
-    label.textContent = 'For your Mac';
-    btn.textContent = 'Download for Mac';
-    btn.href = BASE + 'DYMO-Print-Desk-arm64.dmg';
-    note.textContent = 'This is the version for Apple silicon Macs (M1, M2, M3, M4).';
-    alt.innerHTML = 'Got an older Intel Mac? <a href="' + BASE +
-      'DYMO-Print-Desk-x64.dmg">Download the Intel version</a>. ' +
-      'To check: Apple menu → About This Mac.';
-    alt.hidden = false;
+  if (/Windows/i.test(ua)) {
+    document.getElementById('badge-win').hidden = false;
+  } else if (/Mac OS X|Macintosh/i.test(ua) && !/iPhone|iPad/i.test(ua)) {
+    document.getElementById('badge-mac').hidden = false;
   }
 
-  // Show the published version, when the release API is reachable.
+  const mb = (bytes) => Math.round(bytes / 1048576) + ' MB';
+
   fetch('https://api.github.com/repos/Casselman-Corp/dymo-desk-releases/releases/latest')
     .then((response) => (response.ok ? response.json() : null))
     .then((release) => {
       if (!release || !release.tag_name) return;
+
+      const size = (name) => release.assets.find((a) => a.name === name)?.size;
+      const win = size('DYMO-Print-Desk-Setup.exe');
+      const mac = size('DYMO-Print-Desk-arm64.dmg');
+
+      if (win) document.getElementById('meta-win').textContent = '.exe installer · ' + mb(win);
+      if (mac) document.getElementById('meta-mac').textContent = '.dmg · Apple silicon · ' + mb(mac);
+
       const date = new Date(release.published_at).toLocaleDateString(undefined, {
         year: 'numeric', month: 'long', day: 'numeric',
       });
       document.getElementById('version').textContent =
-        'Version ' + release.tag_name.replace(/^v/, '') + ' · ' + date;
+        'Version ' + release.tag_name.replace(/^v/, '') + ' · released ' + date;
     })
     .catch(() => {});
 </script>

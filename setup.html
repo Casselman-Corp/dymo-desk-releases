@@ -3,294 +3,170 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="How to install DYMO Print Desk on a Mac or Windows PC.">
 <title>DYMO Print Desk Setup</title>
+<meta name="description" content="How to install DYMO Print Desk on a Windows PC or a Mac.">
+<meta name="color-scheme" content="light">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Literata:opsz,wght@7..72,400;7..72,600&family=IBM+Plex+Mono:wght@500;600&display=swap">
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-  /* ---- Light palette: thermal label stock on kraft liner ---- */
   :root {
-    --liner:   #EDE8DD;
-    --paper:   #FBFAF7;
-    --ink:     #15171C;
-    --ink-soft:#4C5058;
-    --rule:    #D8D1C2;
-    --accent:  #1F4E5F;
-    --signal:  #8A5A00;
-    --signal-bg: #FBF1DC;
-    --signal-rule: #DDBE7B;
-    --shadow: 0 1px 0 rgba(21,23,28,.06), 0 10px 28px -18px rgba(21,23,28,.45);
-  }
-  /* System-dark (no stamp) — explicit light choice still wins */
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --liner:   #101216;
-      --paper:   #191C22;
-      --ink:     #ECEAE4;
-      --ink-soft:#A3A8B2;
-      --rule:    #2F343D;
-      --accent:  #79B2C4;
-      --signal:  #E0AC4E;
-      --signal-bg: #241D10;
-      --signal-rule: #57452A;
-      --shadow: 0 1px 0 rgba(0,0,0,.4), 0 14px 32px -20px rgba(0,0,0,.9);
-    }
-  }
-  :root[data-theme="dark"] {
-    --liner:   #101216;
-    --paper:   #191C22;
-    --ink:     #ECEAE4;
-    --ink-soft:#A3A8B2;
-    --rule:    #2F343D;
-    --accent:  #79B2C4;
-    --signal:  #E0AC4E;
-    --signal-bg: #241D10;
-    --signal-rule: #57452A;
-    --shadow: 0 1px 0 rgba(0,0,0,.4), 0 14px 32px -20px rgba(0,0,0,.9);
+    --page:    #F4F6F8;
+    --surface: #FFFFFF;
+    --text:    #101720;
+    --muted:   #5A6675;
+    --border:  #DCE2E9;
+    --accent:  #1A56A0;
+    --accent-wash: #EDF3FA;
+    --accent-line: #CFE0F2;
+    --notice:      #8A5A00;
+    --notice-wash: #FDF6E7;
+    --notice-line: #EBD9AE;
+    --radius: 6px;
   }
 
   * { box-sizing: border-box; }
 
   body {
     margin: 0;
-    background: var(--liner);
-    color: var(--ink);
-    font-family: "Literata", Georgia, serif;
-    font-size: 19px;
+    background: var(--page);
+    color: var(--text);
+    font-family: "Public Sans", system-ui, -apple-system, sans-serif;
+    font-size: 17px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
 
-  .sheet {
-    max-width: 47rem;
-    margin: 0 auto;
-    padding: 0 1.25rem 5rem;
-  }
+  .wrap { max-width: 50rem; margin: 0 auto; padding: 0 1.5rem; }
 
-  /* ---- Barcode motif: irregular bars from overlaid gradients ---- */
-  .bars {
-    height: 30px;
-    background-image:
-      repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 7px),
-      repeating-linear-gradient(90deg, var(--ink) 0 3px, transparent 3px 11px),
-      repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 5px);
-    opacity: .9;
+  .topbar { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .topbar .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; height: 56px;
   }
-  .bars.thin { height: 13px; opacity: .32; margin: 3.5rem 0 0; }
+  .wordmark { font-weight: 700; font-size: .9rem; }
+  .topbar a { color: var(--accent); text-decoration: none; font-size: .9rem; font-weight: 500; }
+  .topbar a:hover { text-decoration: underline; }
 
-  header {
-    padding: 2.75rem 0 0;
-  }
-  .eyebrow {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: .72rem;
-    font-weight: 600;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-  }
+  header.masthead { padding: 3.25rem 0 0; }
   h1 {
-    font-family: "Archivo", system-ui, sans-serif;
-    font-weight: 800;
-    font-size: clamp(2.3rem, 6vw, 3.4rem);
-    line-height: 1.02;
-    letter-spacing: -.025em;
-    text-wrap: balance;
-    margin: .7rem 0 0;
+    font-size: clamp(1.95rem, 4.5vw, 2.5rem);
+    font-weight: 700; letter-spacing: -.02em; line-height: 1.12;
+    margin: 0; text-wrap: balance;
   }
-  .standfirst {
-    font-size: 1.2rem;
-    color: var(--ink-soft);
-    max-width: 34ch;
-    margin: 1rem 0 0;
-  }
+  .lede { font-size: 1.08rem; color: var(--muted); max-width: 44ch; margin: .7rem 0 0; }
 
   /* ---- Platform filter ---- */
   .filter {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: .5rem;
-    margin: 2.25rem 0 0;
-    padding: .85rem 1rem;
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    border-radius: 3px;
+    display: flex; align-items: center; flex-wrap: wrap; gap: .5rem;
+    margin: 2rem 0 0; padding: .8rem 1rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius);
   }
   .filter p {
-    margin: 0 auto 0 0;
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: .74rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
+    margin: 0 auto 0 0; font-size: .8rem; font-weight: 600;
+    letter-spacing: .04em; text-transform: uppercase; color: var(--muted);
   }
   .filter button {
-    font-family: "Archivo", system-ui, sans-serif;
-    font-size: .88rem;
-    font-weight: 600;
-    padding: .4rem .9rem;
-    color: var(--ink);
-    background: transparent;
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    cursor: pointer;
+    font: inherit; font-size: .88rem; font-weight: 600;
+    padding: .35rem .85rem; color: var(--text);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; cursor: pointer;
   }
-  .filter button:hover { border-color: var(--accent); }
+  .filter button:hover { border-color: var(--accent); color: var(--accent); }
   .filter button[aria-pressed="true"] {
-    background: var(--ink);
-    border-color: var(--ink);
-    color: var(--paper);
+    background: var(--accent); border-color: var(--accent); color: #fff;
   }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  /* ---- Steps: a real sequence, so they carry real numbers ---- */
-  .step { margin: 3.25rem 0 0; }
-  .step-head {
-    display: flex;
-    align-items: baseline;
-    gap: .85rem;
-  }
+  /* ---- Steps ---- */
+  .step { margin: 2.75rem 0 0; }
+  .step-head { display: flex; align-items: baseline; gap: .7rem; }
   .step-num {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-weight: 600;
-    font-size: .95rem;
-    color: var(--accent);
+    font-size: .85rem; font-weight: 500; color: var(--accent);
     font-variant-numeric: tabular-nums;
   }
   h2 {
-    font-family: "Archivo", system-ui, sans-serif;
-    font-weight: 700;
-    font-size: 1.65rem;
-    letter-spacing: -.015em;
-    line-height: 1.15;
-    text-wrap: balance;
-    margin: 0;
+    font-size: 1.4rem; font-weight: 700; letter-spacing: -.015em;
+    line-height: 1.2; margin: 0; text-wrap: balance;
   }
-  h3 {
-    font-family: "Archivo", system-ui, sans-serif;
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin: 0 0 .5rem;
-  }
-  p { margin: .9rem 0 0; }
-  .step > p:first-of-type { margin-top: .85rem; }
+  h3 { font-size: 1.02rem; font-weight: 600; margin: 1.5rem 0 .3rem; }
+  p { margin: .75rem 0 0; }
 
-  /* ---- Platform cards ---- */
   .split {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-    gap: 1rem;
-    margin: 1.4rem 0 0;
-    align-items: start;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 1rem; margin: 1.25rem 0 0; align-items: start;
   }
   .plat {
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    padding: 1.15rem 1.3rem 1.4rem;
-    box-shadow: var(--shadow);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.15rem 1.3rem 1.35rem;
   }
   .chip {
-    display: inline-block;
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: .68rem;
-    font-weight: 600;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--paper);
-    background: var(--ink);
-    padding: .2rem .55rem;
-    border-radius: 2px;
-    margin-bottom: .8rem;
+    display: inline-block; font-size: .68rem; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase;
+    color: var(--muted); background: var(--page);
+    border: 1px solid var(--border);
+    padding: .18rem .5rem; border-radius: 3px; margin-bottom: .7rem;
   }
   .plat p:first-of-type { margin-top: 0; }
-  .plat ol { margin: .8rem 0 0; padding-left: 1.2rem; }
-  .plat ol li { margin: .45rem 0; }
+  .plat ol { margin: .7rem 0 0; padding-left: 1.15rem; }
+  .plat ol li { margin: .4rem 0; }
 
-  /* ---- The step everyone panics at ---- */
-  .alarm .plat {
-    background: var(--signal-bg);
-    border-color: var(--signal-rule);
+  /* The one moment people get stuck: flagged, not decorated. */
+  .notice {
+    margin: 1.25rem 0 0; padding: 1rem 1.2rem;
+    background: var(--notice-wash);
+    border: 1px solid var(--notice-line);
+    border-left: 3px solid var(--notice);
+    border-radius: var(--radius);
   }
-  .alarm .chip { background: var(--signal); }
-  .reassure {
-    margin: 1.3rem 0 0;
-    padding: 1rem 1.2rem;
-    border-left: 3px solid var(--signal);
-    background: var(--signal-bg);
-    font-size: 1.05rem;
-  }
-  .reassure strong { color: var(--signal); }
+  .notice strong { color: var(--notice); }
 
   .aside {
-    margin: 1.2rem 0 0;
-    padding-left: 1.1rem;
-    border-left: 2px solid var(--rule);
-    font-size: .95rem;
-    color: var(--ink-soft);
+    margin: 1.1rem 0 0; padding: .85rem 1.1rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); font-size: .93rem; color: var(--muted);
   }
 
-  /* ---- Reference sections ---- */
-  .ref { margin: 3.25rem 0 0; }
-  dl { margin: 1.3rem 0 0; }
-  dt {
-    font-family: "Archivo", system-ui, sans-serif;
-    font-weight: 600;
-    font-size: 1.02rem;
-    margin-top: 1.4rem;
-  }
-  dd { margin: .35rem 0 0; color: var(--ink-soft); }
+  .ref { margin: 2.75rem 0 0; }
+  dl { margin: 1rem 0 0; }
+  dt { font-weight: 600; margin-top: 1.2rem; }
+  dd { margin: .2rem 0 0; color: var(--muted); }
 
   .ui {
     font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: .86em;
-    font-weight: 600;
-    background: color-mix(in srgb, var(--accent) 11%, transparent);
-    color: var(--accent);
-    padding: .1em .38em;
-    border-radius: 2px;
-    white-space: nowrap;
+    font-size: .85em; font-weight: 500;
+    background: var(--accent-wash); color: var(--accent);
+    border: 1px solid var(--accent-line);
+    padding: .08em .35em; border-radius: 3px; white-space: nowrap;
   }
 
   footer {
-    margin: 4rem 0 0;
-    padding-top: 1.4rem;
-    border-top: 1px solid var(--rule);
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: .74rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
+    margin: 3rem 0 0; border-top: 1px solid var(--border);
+    padding: 1.1rem 0 3.5rem;
+    display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    font-size: .82rem; color: var(--muted);
   }
-</style>
-<style>
-  .backlink {
-    display:inline-block; margin:1.75rem 0 0;
-    font-family:"IBM Plex Mono", ui-monospace, monospace;
-    font-size:.75rem; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--accent); text-decoration:none;
+  footer a { color: var(--accent); }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px;
   }
-  .backlink:hover { text-decoration:underline; }
 </style>
 </head>
 <body>
 
+<div class="topbar">
+  <div class="wrap">
+    <span class="wordmark">Casselman Corp</span>
+    <a href="./">&larr; Downloads</a>
+  </div>
+</div>
 
-<div class="bars" role="presentation"></div>
-
-<div class="sheet">
-    <a class="backlink" href="./">&larr; Back to downloads</a>
-  <header>
-    <p class="eyebrow">Casselman Corp · Label printing</p>
+<div class="wrap">
+  <header class="masthead">
     <h1>Setting up DYMO Print Desk</h1>
-    <p class="standfirst">You only do this once. After that, opening it is a double-click.</p>
+    <p class="lede">You only do this once. After that, opening it is a double-click.</p>
   </header>
 
   <div class="filter">
@@ -302,12 +178,11 @@
 
   <section class="step">
     <div class="step-head"><span class="step-num">01</span><h2>Install it</h2></div>
-
     <div class="split">
       <div class="plat" data-plat="win">
         <span class="chip">Windows</span>
         <p>Download <strong>DYMO-Print-Desk-Setup.exe</strong> and double-click it.</p>
-        <p>It installs itself and puts a shortcut on your desktop. Nothing to choose.</p>
+        <p>It installs itself and puts a shortcut on your desktop. There is nothing to choose.</p>
       </div>
       <div class="plat" data-plat="mac">
         <span class="chip">Mac</span>
@@ -315,27 +190,26 @@
         <p>A window opens showing the app icon next to an Applications folder. Drag the icon onto the folder, then close the window.</p>
       </div>
     </div>
-
-    <p class="aside" data-plat="mac">Two Mac downloads are offered. Pick <strong>arm64</strong> for any Mac from 2020 onward, or the other for older Intel Macs. Not sure? Apple menu → About This Mac. If it says Apple M1, M2, M3 or M4, you want arm64.</p>
+    <p class="aside" data-plat="mac"><strong>Two Mac downloads are offered.</strong> Choose Apple silicon for any Mac from 2020 onward, or Intel for older ones. To check: Apple menu → About This Mac. If it mentions M1, M2, M3 or M4, you want Apple silicon.</p>
   </section>
 
-  <section class="step alarm">
+  <section class="step">
     <div class="step-head"><span class="step-num">02</span><h2>Get past the security warning</h2></div>
 
-    <p class="reassure"><strong>This warning is expected, and it only appears once.</strong> It shows up because the app doesn't carry a paid security certificate yet — not because anything is wrong with it.</p>
+    <p class="notice"><strong>This warning is expected, and it appears only once.</strong> It shows up because the app doesn't carry a paid security certificate yet — not because anything is wrong with it.</p>
 
     <div class="split">
       <div class="plat" data-plat="win">
         <span class="chip">Windows</span>
         <p>A blue box says <em>“Windows protected your PC.”</em></p>
         <ol>
-          <li>Click <span class="ui">More info</span> — it's small text inside the box, easy to miss.</li>
+          <li>Click <span class="ui">More info</span> — small text inside the box, easy to miss.</li>
           <li>Click <span class="ui">Run anyway</span>.</li>
         </ol>
       </div>
       <div class="plat" data-plat="mac">
         <span class="chip">Mac</span>
-        <p>A box says the app <em>“could not be verified”</em> or is from an unidentified developer.</p>
+        <p>A box says the app <em>“could not be verified”</em> or comes from an unidentified developer.</p>
         <ol>
           <li>Open <span class="ui">System Settings</span> → <span class="ui">Privacy &amp; Security</span>.</li>
           <li>Scroll down to the line about DYMO Print Desk being blocked.</li>
@@ -349,24 +223,35 @@
 
   <section class="step">
     <div class="step-head"><span class="step-num">03</span><h2>Set two things, once</h2></div>
-
     <p>The app opens. There are exactly two things to fill in, and it remembers both.</p>
 
-    <h3 style="margin-top:1.6rem">Pick your printer</h3>
-    <p>Find the <span class="ui">Label printer</span> dropdown and choose your DYMO LabelWriter from the list. It saves as soon as you pick it.</p>
+    <h3>Pick your printer</h3>
+    <p>Find the <span class="ui">Label printer</span> dropdown and choose your DYMO LabelWriter. It saves the moment you pick it.</p>
 
-    <h3 style="margin-top:1.6rem">Paste your Square key</h3>
-    <p>Paste it into the <span class="ui">Square API key</span> box. It's stored securely on this computer, so you won't be asked for it again.</p>
+    <h3>Paste your Square key</h3>
+    <p>Paste it into the <span class="ui">Square API key</span> box. It's stored securely on this computer, so you won't be asked again.</p>
 
-    <p>Then click <span class="ui">Fetch inventory</span>. Your products load into the table.</p>
+    <p>Then click <span class="ui">Fetch inventory</span> and your products load into the table.</p>
   </section>
-
-  <div class="bars thin" role="presentation"></div>
 
   <section class="ref">
     <h2>Printing a label</h2>
-    <p>Find the product in the table, or type a barcode by hand. Set how many labels you want, then click <span class="ui">Print labels</span>.</p>
-    <p>The preview on the right is exactly what comes out of the printer — 28 × 89 mm, barcode running down the length of the label.</p>
+    <p>Find the product in the table, or type a barcode by hand. Set how many labels you want, then click <span class="ui">Print labels</span>. The preview on the right is exactly what comes out of the printer.</p>
+  </section>
+
+  <section class="ref">
+    <h2>Keeping it up to date</h2>
+    <p>The app checks for new versions on its own and shows the result in the top-right corner, next to the version number. You can press <span class="ui">Check now</span> there any time.</p>
+    <div class="split">
+      <div class="plat" data-plat="win">
+        <span class="chip">Windows</span>
+        <p>Updates download quietly in the background. When one is ready the button changes to <span class="ui">Restart now</span> — click it when convenient.</p>
+      </div>
+      <div class="plat" data-plat="mac">
+        <span class="chip">Mac</span>
+        <p>The button changes to <span class="ui">Get it</span> and opens the download page. Install it the same way as the first time — but you won't need the Privacy &amp; Security step again.</p>
+      </div>
+    </div>
   </section>
 
   <section class="ref">
@@ -382,27 +267,13 @@
       <dd>Anything over 32 characters prints too densely to scan reliably. Use a shorter code.</dd>
 
       <dt>The app won't open at all</dt>
-      <dd>Restart the computer and try once more. If it still won't open, take a photo of the error message before clicking anything.</dd>
+      <dd>Restart the computer and try once more. If it still won't open, photograph the error message before clicking anything.</dd>
     </dl>
   </section>
 
-  <section class="ref">
-    <h2>Updates</h2>
-    <div class="split">
-      <div class="plat" data-plat="win">
-        <span class="chip">Windows</span>
-        <p>Updates install themselves quietly in the background. There is nothing for you to do.</p>
-      </div>
-      <div class="plat" data-plat="mac">
-        <span class="chip">Mac</span>
-        <p>A message appears when a new version is ready, with a Download button. Install it the same way as the first time — but you won't need the Privacy &amp; Security step again.</p>
-      </div>
-    </div>
-  </section>
-
   <footer>
-    <span>DYMO Print Desk</span>
-    <span>Keep this page — you may want it on the next computer</span>
+    <span>DYMO Print Desk setup guide</span>
+    <span><a href="./">Downloads</a></span>
   </footer>
 </div>
 
@@ -413,7 +284,6 @@
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
       const choice = button.dataset.filter;
-
       buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
       targets.forEach((el) => {
         el.hidden = choice !== 'all' && el.dataset.plat !== choice;
@@ -421,6 +291,5 @@
     });
   });
 </script>
-
 </body>
 </html>
